@@ -1,24 +1,39 @@
-import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
+import React, { useState } from "react";
+import { Cat } from "./cat.js";
+import { Weapon } from "./weapons.js";
 //create your first component
 export function Home() {
+	const [page, setPage] = useState("weapon");
+	const [user1, setUser1] = useState("");
+	const [user2, setUser2] = useState("");
+	const [first, setFirst] = useState("");
+	function changePage(newPage) {
+		setPage(newPage);
+	}
+	function nameUser(e) {
+		setUser1(e.target.value);
+	}
+	function nameUser2(e) {
+		setUser2(e.target.value);
+	}
+	function changeFirst(newFirst) {
+		setFirst(newFirst);
+	}
+
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div>
+			{page == "weapon" ? (
+				<Weapon
+					changePage={changePage}
+					nameUser={nameUser}
+					nameUser2={nameUser2}
+					changeFirst={changeFirst}
+				/>
+			) : (
+				<Cat first={first} />
+			)}
+			{/* <Cat />
+			<Weapon /> */}
 		</div>
 	);
 }
